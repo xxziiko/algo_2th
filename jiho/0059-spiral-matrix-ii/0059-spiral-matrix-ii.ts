@@ -1,6 +1,6 @@
 function generateMatrix(n: number): number[][] {
-    const numbers = Array.from({ length: n * n }, (_, i) => i +1);
     const matrix = Array.from({ length: n }, (_, i) => Array(n).fill(0));
+    let num = 0
     let top =0
     let left = 0
     let right = n-1
@@ -10,20 +10,20 @@ function generateMatrix(n: number): number[][] {
     while(top <= bottom && left <= right) {
         //왼 -> 오
         for(let col = left; col <= right; col++){
-            matrix[top][col] = numbers.shift()
+            matrix[top][col] = num+=1
         }
         top++
 
         //위 -> 아래 
         for(let row = top; row <= bottom; row++) {
-            matrix[row][right] = numbers.shift()
+            matrix[row][right] = num+=1
         }
         right--
 
         //오 -> 왼
         if(left <= right) {
             for(let col = right; col >= left; col--) {
-                matrix[bottom][col] = numbers.shift()
+                matrix[bottom][col] = num+=1
             }
         }
         bottom--
@@ -31,7 +31,7 @@ function generateMatrix(n: number): number[][] {
         // 아래 -> 위
         if(top <= bottom) {
             for(let row = bottom; row >= top; row--) {
-                matrix[row][left] = numbers.shift()
+                matrix[row][left] = num+=1
             }
         }
         left++
